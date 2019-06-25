@@ -7,15 +7,15 @@ class Tokenizer
 public:
 	Tokenizer();
 	std::vector<std::string> tokenize(std::string s);
-	void quote(std::string open, string close);
+	void quote(std::string open, std::string close);
 	void separate(std::string sep);
 	void escape(char esc);
 	
 protected:
 	std::vector<std::string> separate_;
-	std::vector<size_t> sep_pos_, escape_pos_;
-	std::vector<std::pair<std::string>> quote_;
-	std::vector<std::pair<size_t, size_t>> quote_pos_;
+	std::vector<size_t> escape_pos_;
+	std::vector<std::pair<std::string, std::string>> quote_;// v open, close
+	std::vector<std::pair<size_t, size_t>> quote_pos_, sep_pos_;//pos, size
 	char escape_ = '\\';
 
 private:
