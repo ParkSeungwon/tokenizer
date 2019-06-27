@@ -1,6 +1,7 @@
 #include<catch.hpp>
 #include<sstream>
 #include<iostream>
+#include"src/token.h"
 using namespace std;
 
 TEST_CASE("stringstream") {
@@ -13,3 +14,5 @@ TEST_CASE("stringstream") {
 	for(char c; ss >> c; ) cout << c;
 }
 
+TEST_CASE("quo_find") {
+}
