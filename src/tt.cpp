@@ -10,13 +10,13 @@ string u = "[12[4[]7]9[],3], hhh";
 int main()
 {
 	Tokenizer tk, rv;
-	tk.quote("[", "]");
+	tk.quote("\"[", "]\"");
 	tk.quote("\"", "\"");
 	tk.separate(",");
 	rv.quote("(", ")");
-	rv.separate(",");
+	rv.separate(" ");
 	auto v = tk.tokenize(t);// ]","[ erroe
 	for(string s : v) cout << s << endl;
-//	for(string s : rv.tokenize(v[13])) cout << s << endl;
+	for(string s : rv.tokenize(u)) cout << s << endl;
 }
 

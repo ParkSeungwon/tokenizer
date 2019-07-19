@@ -15,6 +15,7 @@ int s2i(string s) {
 }
 
 string unquote(string s) {
+	if(s[0] == ' ') s = s.erase(0, 1);
 	if(s[0] == '"' || s[0] == '\'') { 
 		s.pop_back();
 		s = s.erase(0, 1);
@@ -45,7 +46,7 @@ int main()
 	tk2.quote("[", "]");
 	tk2.quote("\"", "\"");
 
-	for(int index=1; getline(f, line); index++) {
+	for(int index=555; getline(f, line); index++) {
 		string s;
 		if(*line.rbegin() >= '0' && *line.rbegin() <= '9') {//telephone new line bug
 			s = line + ',';
@@ -78,11 +79,11 @@ int main()
 
 		if(size_t it = cols[6].find(','); it != string::npos) cols[6].erase(it, 1);
 		if(size_t it = cols[12].find(','); it != string::npos) cols[12].erase(it, 1);
-		cout << "rate : " << rate << endl << "phone1 : " << phone1 << endl << "phone2 : " << phone2 << endl << "review : " << review << endl << "menu : " << menu << endl << "type : " << type << endl << "city : " << city << endl << endl;
+//		cout << "rate : " << rate << endl << "phone1 : " << phone1 << endl << "phone2 : " << phone2 << endl << "review : " << review << endl << "menu : " << menu << endl << "type : " << type << endl << "city : " << city << endl << endl;
 
 		sq[0].insert(index, cols[0], unquote(cols[1]), cols[2], cols[3]=="Yes" ? 1 : 0,
 				cols[4] == "Yes" ? 1 : 0, rate, s2i(cols[6]), phone1, phone2,
-				cols[8], cols[9], stoi(cols[12]) / 2, type, city);
+				cols[8], cols[9], s2i(cols[12]) / 2, type, city);
 		ss.clear(); ss << unquote(cols[10]);//dish_liked
 		while(getline(ss, s, ',')) sq[3].insert(index, s);
 		ss.clear(); ss << unquote(cols[11]);//cuisine

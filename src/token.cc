@@ -20,7 +20,8 @@ void Tokenizer::clear()
 	separate_.clear();
 }
 
-size_t Tokenizer::find_match(string s, size_t pos, string o, string c, int sub) const {//o : open quote, c : closing quote, sub : sub level, pos : begin search
+size_t Tokenizer::find_match(string s, size_t pos, string o, string c, int sub) const
+{//o : open quote, c : closing quote, sub : sub level, pos : begin search
 	size_t i, j;
 	do i = s.find(o, pos);
 	while(find(escape_pos_.begin(), escape_pos_.end(), i -1) != escape_pos_.end());
@@ -28,8 +29,8 @@ size_t Tokenizer::find_match(string s, size_t pos, string o, string c, int sub) 
 	while(find(escape_pos_.begin(), escape_pos_.end(), j -1) != escape_pos_.end());
 
 	if(i < j) return find_match(s, i + o.size(), o, c, sub + 1);
-	else if(!sub) return j;
-	else return find_match(s, j + c.size(), o, c, sub -1);
+	else if(!sub) return j + c.size() - 1;//if 2char quote return last closing one
+	else return find_match(s, j + c.size(), o, c, sub - 1);
 }
 vector<pair<size_t, size_t>> Tokenizer::quo_find(string s, string o, string c) const
 {
